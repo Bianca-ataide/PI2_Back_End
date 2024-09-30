@@ -12,3 +12,54 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model Alternative {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  text       String
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId String?   @db.ObjectId
+}
+
+model Question {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  question      String
+  alternatives  Alternative[]
+  Quiz          Quiz[]        @relation(fields: [quizIDs], references: [id])
+  quizIDs       String[]      @db.ObjectId
+  alternativeId String        @db.ObjectId
+}
+
+model Quiz {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  questions   Question[] @relation(fields: [questionIDs], references: [id])
+  questionIDs String[]   @db.ObjectId
+  difficulty  Int
+  xpPoints    Int
+  Course      Course?    @relation(fields: [courseId], references: [id])
+  courseId    String?    @db.ObjectId
+}
+
+model Course {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  quizes   Quiz[]
+  Progress Progress[]
+}
+
+model Progress {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  course   Course @relation(fields: [courseId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
+  progress Int
+  courseId String @db.ObjectId
+  userId   String @db.ObjectId
+}
+
+model User {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  nickname String
+  username String
+  password String
+  salt     String
+  Progress Progress[]
+}
