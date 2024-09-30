@@ -57,7 +57,7 @@ model Progress {
 
 model User {
   id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  nickname String
+  nickname String     @unique
   username String
   password String
   salt     String
