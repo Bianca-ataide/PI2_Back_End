@@ -5,6 +5,7 @@ export const authReq = (permissions: String[]) => {
     const userRole = req.body.role;
     if (!permissions.includes(userRole))
       return res.status(401).send({ error: "Unauthorized Access" });
+
     next();
   };
 };
