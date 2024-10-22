@@ -33,8 +33,8 @@ model Quiz {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   questions   Question[] @relation(fields: [questionIDs], references: [id])
   questionIDs String[]   @db.ObjectId
-  section     Section    @relation(fields: [sectionId], references: [id])
   sectionId   String     @db.ObjectId
+  Section     Section[]
 }
 
 model Section {
@@ -43,7 +43,7 @@ model Section {
   quizId   String     @db.ObjectId
   Course   Course?    @relation(fields: [courseId], references: [id])
   courseId String?    @db.ObjectId
-  Quiz     Quiz[]
+  Quiz     Quiz       @relation(fields: [quizId], references: [id])
   Progress Progress[]
 }
 
