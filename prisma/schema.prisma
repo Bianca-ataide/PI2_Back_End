@@ -49,9 +49,10 @@ model Section {
 }
 
 model Course {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   sections Section[]
+  Progress Progress[]
 }
 
 model Progress {
@@ -59,8 +60,10 @@ model Progress {
   user      User    @relation(fields: [userId], references: [id])
   Section   Section @relation(fields: [sectionId], references: [id])
   completed Boolean
+  course    Course  @relation(fields: [courseId], references: [id])
   userId    String  @db.ObjectId
   sectionId String  @db.ObjectId
+  courseId  String  @db.ObjectId
 }
 
 model User {
