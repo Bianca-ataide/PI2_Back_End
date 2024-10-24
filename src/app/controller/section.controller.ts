@@ -9,7 +9,7 @@ import {
 } from "../schemas/section.schemas";
 import SectionService from "../service/section.service";
 
-export class sectionController {
+export class SectionController {
   public async register(req: Request, res: Response) {
     const sectionService = new SectionService();
 

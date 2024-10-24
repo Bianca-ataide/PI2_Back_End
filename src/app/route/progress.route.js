@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.progressRouter = void 0;
+const express_1 = require("express");
+const progress_controller_1 = require("../controller/progress.controller");
+const progressRouter = (0, express_1.Router)();
+exports.progressRouter = progressRouter;
+const progressController = new progress_controller_1.ProgressController();
+progressRouter.post("/", progressController.register);
+progressRouter.get("/", progressController.search);
+progressRouter.put("/", progressController.update);
+progressRouter.delete("/", progressController.remove);

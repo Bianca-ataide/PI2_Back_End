@@ -9,7 +9,7 @@ import {
 } from "../schemas/progress.schemas";
 import ProgressService from "../service/progress.service";
 
-export class progressController {
+export class ProgressController {
   public async register(req: Request, res: Response) {
     const progressService = new ProgressService();
 

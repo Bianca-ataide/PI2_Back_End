@@ -10,7 +10,9 @@ import { courseRouter } from "./route/course.route";
 import { progressRouter } from "./route/progress.route";
 
 class App {
-  public app: express.Application;progressstructor() {
+  public app: express.Application;
+
+  constructor() {
     this.app = express();
     this.middleware();
     this.route();
