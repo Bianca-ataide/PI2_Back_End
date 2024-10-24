@@ -6,7 +6,8 @@ export const AlternativeCreateRequestSchema = Zod.object({
         .min(1, { message: "Field text must not be empty." }),
 
     questionId: Zod
-        .string({ required_error: "Field questionId must compose request body." }),
+        .string({ required_error: "Field questionId must compose request body." })
+        .optional(),
     });
 
 export const AlternativeSearchRequestSchema = Zod.object({
