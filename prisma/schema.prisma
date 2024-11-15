@@ -31,8 +31,8 @@ model Question {
 
 model Quiz {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  questions   Question[] @relation(fields: [questionIDs], references: [id])
-  questionIDs String[]   @db.ObjectId
+  questions   Question[]? @relation(fields: [questionIDs], references: [id])
+  questionIDs String[]?   @db.ObjectId
   sectionId   String     @db.ObjectId
   Section     Section[]
 }
@@ -43,8 +43,8 @@ model Section {
   text     String
   Course   Course?    @relation(fields: [courseId], references: [id])
   courseId String?    @db.ObjectId
-  Quiz     Quiz?      @relation(fields: [quizId], references: [id])
-  quizId   String?    @db.ObjectId
+  Quiz     Quiz ?      @relation(fields: [quizId], references: [id])
+  quizId   String ?    @db.ObjectId
   Progress Progress[]
 }
 
