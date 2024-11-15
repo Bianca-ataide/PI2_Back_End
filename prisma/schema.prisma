@@ -41,10 +41,10 @@ model Section {
   id       String     @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   text     String
-  quizId   String     @db.ObjectId
+  quizId   String ?    @db.ObjectId
   Course   Course?    @relation(fields: [courseId], references: [id])
   courseId String?    @db.ObjectId
-  Quiz     Quiz       @relation(fields: [quizId], references: [id])
+  Quiz     Quiz ?      @relation(fields: [quizId], references: [id])
   Progress Progress[]
 }
 
