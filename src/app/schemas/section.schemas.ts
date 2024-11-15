@@ -13,6 +13,7 @@ export const SectionCreateRequestSchema = Zod.object({
         .string({ required_error: "Field quizId must compose request body." })
         .optional(),
         //.min(1, { message: "Field quizId must not be empty." }),
+        
 
     courseId: Zod
         .string({ required_error: "Field courseId must compose request body." })
