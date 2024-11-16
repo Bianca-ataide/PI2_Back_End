@@ -3,8 +3,9 @@ import Zod from "zod";
 export const QuizCreateRequestSchema = Zod.object({
     questionsIDs: Zod
         .string({ required_error: "Field questionsIDs must compose request body." })
-        .min(1, { message: "Field questionsIDs must not be empty." })
-        .array(),
+        //.min(1, { message: "Field questionsIDs must not be empty." })
+        .array()
+        .optional(),
 
     sectionId: Zod
         .string({ required_error: "Field sectionId must compose request body." })
