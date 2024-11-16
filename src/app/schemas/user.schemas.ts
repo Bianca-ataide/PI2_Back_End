@@ -1,21 +1,30 @@
 import Zod from "zod";
 
+export const UserLoginRequestSchema = Zod.object({
+    username: Zod
+        .string({ required_error: "Field username must compose request body." })
+        .min(1, { message: "Field username must not be empty." }),
+    password: Zod
+        .string({ required_error: "Field password must compose request body." })
+        .min(1, { message: "Field password must not be empty." }),
+    });
+
 export const UserCreateRequestSchema = Zod.object({
     username: Zod
-        .string({ required_error: "Field name must compose request body." })
-        .min(1, { message: "Field name must not be empty." }),
+        .string({ required_error: "Field username must compose request body." })
+        .min(1, { message: "Field username must not be empty." }),
 
     nickname: Zod
-        .string({ required_error: "Field name must compose request body." })
-        .min(1, { message: "Field name must not be empty." }),
+        .string({ required_error: "Field nickname must compose request body." })
+        .min(1, { message: "Field nickname must not be empty." }),
 
     password: Zod
-        .string({ required_error: "Field name must compose request body." })
-        .min(1, { message: "Field name must not be empty." }),
+        .string({ required_error: "Field password must compose request body." })
+        .min(1, { message: "Field password must not be empty." }),
 
     salt: Zod
-        .string({ required_error: "Field name must compose request body." })
-        .min(1, { message: "Field name must not be empty." }),
+        .string({ required_error: "Field salt must compose request body." })
+        .min(1, { message: "Field salt must not be empty." }),
     });
 
 export const UserSearchRequestSchema = Zod.object({
@@ -30,8 +39,8 @@ export const UserSearchRequestSchema = Zod.object({
 
 export const UserUpdateRequestSchema = Zod.object({
     username: Zod
-        .string({ required_error: "Field name must compose request body." })
-        .min(1, { message: "Field name must not be empty." }),
+        .string({ required_error: "Field username must compose request body." })
+        .min(1, { message: "Field username must not be empty." }),
 
     nickname: Zod
         .string()
@@ -44,6 +53,6 @@ export const UserUpdateRequestSchema = Zod.object({
 
 export const UserRemoveRequestSchema = Zod.object({
     username: Zod
-        .string({ required_error: "Field name must compose request body." })
-        .min(1, { message: "Field name must not be empty." }),
+        .string({ required_error: "Field username must compose request body." })
+        .min(1, { message: "Field username must not be empty." }),
 });

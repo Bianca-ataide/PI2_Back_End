@@ -3,11 +3,32 @@ import { prisma } from "../database/prisma";
 import { ValidationExceptionError } from "../exception/validation.exception";
 import {
   UserCreateRequestSchema,
+  UserLoginRequestSchema,
   UserSearchRequestSchema,
   UserUpdateRequestSchema,
 } from "../schemas/user.schemas";
 
 export default class UserService {
+  public async login(user: Zod.infer<typeof UserLoginRequestSchema>) {
+    const requestRef = user;
+
+    console.log(requestRef)
+    try {
+      const user = await prisma.user.findUnique({
+        where: {
+          username: requestRef.username,
+          password: requestRef.password
+        },
+      });
+
+      if(!user) return false;
+
+      return true;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   public async register(user: Zod.infer<typeof UserCreateRequestSchema>) {
     try {
       const requestRef = user;
@@ -26,7 +47,7 @@ export default class UserService {
         if (err.code == "P2002")
           throw new ValidationExceptionError(
             400,
-            "Bad Request: " + user.nickname + " - Já Cadastrado"
+            "Bad Request: " + user.username + " - Já Cadastrado"
           );
       }
 

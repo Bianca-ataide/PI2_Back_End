@@ -9,6 +9,7 @@ userRouter.post("/", userController.register);
 userRouter.get("/", userController.search);
 userRouter.put("/", userController.update);
 userRouter.delete("/", userController.remove);
+userRouter.get("/login", userController.login)
 
 export { userRouter };
 
