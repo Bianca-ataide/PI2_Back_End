@@ -12,7 +12,6 @@ export default class UserService {
   public async login(user: Zod.infer<typeof UserLoginRequestSchema>) {
     const requestRef = user;
 
-    console.log(requestRef)
     try {
       const user = await prisma.user.findUnique({
         where: {
