@@ -29,13 +29,8 @@ model Quiz {
 model Section {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   name   String @unique
+  text   String
   quiz   String
-}
-
-model Course {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  name     String   @unique
-  sections String[]
 }
 
 model Progress {
@@ -43,6 +38,12 @@ model Progress {
   completed Boolean
   username  String @unique
   section   String @unique
+}
+
+model Course {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String   @unique
+  sections String[]
 }
 
 model User {
