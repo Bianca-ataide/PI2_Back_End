@@ -8,7 +8,7 @@ export const QuizCreateRequestSchema = Zod.object({
         .string()
         .min(1, { message: "Questions must not be empty." })
         .array()
-        .length(4, {message: "Field questions must contain a array of 4 strings."}),
+        .min(1, {message: "Field questions must contain at least one question."}),
 });
 
 
@@ -22,11 +22,11 @@ export const QuizUpdateRequestSchema = Zod.object({
     name: Zod
         .string({ required_error: "Field name must compose request body." })
         .min(1, { message: "Field name must not be empty." }),
-    questions: Zod
+        questions: Zod
         .string()
         .min(1, { message: "Questions must not be empty." })
         .array()
-        .length(4, {message: "Field questions must contain a array of 4 strings."}),
+        .min(1, {message: "Field questions must contain at least one question."}),
 });
 
 export const QuizRemoveRequestSchema = Zod.object({
