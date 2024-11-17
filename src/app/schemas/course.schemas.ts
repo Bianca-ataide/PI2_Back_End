@@ -9,7 +9,7 @@ export const CourseCreateRequestSchema = Zod.object({
         .string()
         .min(1, { message: "Sections must not be empty." })
         .array()
-        .length(4, {message: "Field sections must contain a array of 4 strings."}),
+        .length(1, {message: "Field sections must contain at least one section."}),
 });
 
 export const CourseSearchRequestSchema = Zod.object({
@@ -27,7 +27,7 @@ export const CourseUpdateRequestSchema = Zod.object({
         .string()
         .min(1, { message: "Sections must not be empty." })
         .array()
-        .length(4, {message: "Field sections must contain a array of 4 strings."})
+        .length(1, {message: "Field sections must contain at least one section."})
         .optional(),
 });
 
