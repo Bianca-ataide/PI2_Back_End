@@ -1,13 +1,12 @@
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
-import { userRouter } from "./route/user.route";
-import { alternativeRouter } from "./route/alternative.route";
+import { courseRouter } from "./route/course.route";
+import { progressRouter } from "./route/progress.route";
 import { questionRouter } from "./route/question.route";
 import { quizRouter } from "./route/quiz.route";
 import { sectionRouter } from "./route/section.route";
-import { courseRouter } from "./route/course.route";
-import { progressRouter } from "./route/progress.route";
+import { userRouter } from "./route/user.route";
 
 class App {
   public app: express.Application;
@@ -26,7 +25,6 @@ class App {
 
   route() {
     this.app.use("/user", userRouter);
-    this.app.use("/alternative", alternativeRouter);
     this.app.use("/question", questionRouter);
     this.app.use("/quiz", quizRouter);
     this.app.use("/section", sectionRouter);
