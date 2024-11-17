@@ -132,7 +132,7 @@ export class QuestionController {
     try {
       const { data } = result;
 
-      const question = await questionService.remove(data.id);
+      const question = await questionService.remove(data.question);
 
       res.status(200).send({
         message: "🗑️ - Remotion Completed - " + question.question + " deleted.",

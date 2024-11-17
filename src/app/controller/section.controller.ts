@@ -132,7 +132,7 @@ export class SectionController {
     try {
       const { data } = result;
 
-      const section = await sectionService.remove(data.id);
+      const section = await sectionService.remove(data.name);
 
       res.status(200).send({
         message: "🗑️ - Remotion Completed - " + section.name + " deleted.",

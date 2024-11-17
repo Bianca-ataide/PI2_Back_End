@@ -58,7 +58,7 @@ export default class sectionService {
     try {
       const result = await prisma.section.update({
         where: {
-          id: requestRef.id,
+          name: requestRef.name,
         },
         data: {
           ...requestRef,

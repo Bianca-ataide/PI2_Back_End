@@ -132,7 +132,7 @@ export class QuizController {
     try {
       const { data } = result;
 
-      const quiz = await quizService.remove(data.id);
+      const quiz = await quizService.remove(data.name);
 
       res.status(200).send({
         message: "🗑️ - Remotion Completed - " + quiz.id + " deleted.",

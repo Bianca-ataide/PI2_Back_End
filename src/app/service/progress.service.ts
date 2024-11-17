@@ -3,6 +3,7 @@ import { prisma } from "../database/prisma";
 import { ValidationExceptionError } from "../exception/validation.exception";
 import {
   ProgressCreateRequestSchema,
+  ProgressRemoveRequestSchema,
   ProgressSearchRequestSchema,
   ProgressUpdateRequestSchema,
 } from "../schemas/progress.schemas";
@@ -26,7 +27,7 @@ export default class ProgressService {
         if (err.code == "P2002")
           throw new ValidationExceptionError(
             400,
-            "Bad Request: " + progress.courseId + " - Já Cadastrado"
+            "Bad Request: " + progress.section + ":" + progress.username + " - Já Cadastrado"
           );
       }
 
@@ -40,9 +41,8 @@ export default class ProgressService {
     try {
       const progresses = await prisma.progress.findMany({
         where: {
-          courseId: { contains: requestRef.courseId },
-          userId: { contains: requestRef.userId },
-          sectionId: { contains: requestRef.sectionId},
+          username: { contains: requestRef.username },
+          section: { contains: requestRef.section},
         },
       });
 
@@ -60,7 +60,8 @@ export default class ProgressService {
     try {
       const result = await prisma.progress.update({
         where: {
-          id: requestRef.id,
+          section: requestRef.section,
+          username: requestRef.username
         },
         data: {
           ...requestRef,
@@ -75,7 +76,7 @@ export default class ProgressService {
         if (err.code == "P2025")
           throw new ValidationExceptionError(
             404,
-            requestRef.id + " - Progress not found"
+            requestRef.section + ":" + requestRef.username + " - Progress not found"
           );
       }
 
@@ -83,13 +84,14 @@ export default class ProgressService {
     }
   }
 
-  public async remove(id: string) {
-    const requestRef = { id: id };
+  public async remove(progress: Zod.infer<typeof ProgressRemoveRequestSchema>) {
+    const requestRef = progress;
 
     try {
       const result = await prisma.progress.delete({
         where: {
-          id: requestRef.id,
+          section: progress.section,
+          username: progress.username
         },
       });
 
@@ -101,7 +103,7 @@ export default class ProgressService {
         if (err.code == "P2025")
           throw new ValidationExceptionError(
             404,
-            requestRef.id + " - Progress not found"
+            requestRef.section + ":" + requestRef.username + " - Progress not found"
           );
       }
 

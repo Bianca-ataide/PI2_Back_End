@@ -4,53 +4,41 @@ export const QuestionCreateRequestSchema = Zod.object({
     question: Zod
         .string({ required_error: "Field question must compose request body." })
         .min(1, { message: "Field question must not be empty." }),
+    alternatives: Zod
+        .string()
+        .min(1, { message: "Alternative must not be empty." })
+        .array()
+        .length(4, {message: "Field alternative must contain a array of 4 strings."}),
+    answerText: Zod
+        .string({ required_error: "Field answerText must compose request body." })
+        .min(1, { message: "Field answerText must not be empty." })
+});
 
-    quizIDs: Zod
-        .string({ required_error: "Field quizIDs must compose request body." })
-        .min(1, { message: "Field quizIDs must not be empty." })
-        .array(),
-
-    answerId: Zod
-        .string({ required_error: "Field answerId must compose request body." })
-        .min(1, { message: "Field answerId must not be empty." }),
-
-    });
 
 export const QuestionSearchRequestSchema = Zod.object({
     question: Zod
         .string()
-        .optional(),
-
-    quizIDs: Zod
-        .string()
-        .optional(),
-
-    answerId: Zod
-        .string()
-        .optional(),
-});
-
-export const QuestionUpdateRequestSchema = Zod.object({
-    id: Zod
-        .string({ required_error: "Field id must compose request body." })
-        .min(1, { message: "Field id must not be empty." }),
-
-    question: Zod
-        .string({ required_error: "Field question must compose request body." })
-        .min(1, { message: "Field question must not be empty." }),
-
-    quizIDs: Zod
-        .string()
-        .array()
-        .optional(),
-
-    answerId: Zod
-        .string()
         .optional()
 });
 
+export const QuestionUpdateRequestSchema = Zod.object({
+    question: Zod
+        .string({ required_error: "Field question must compose request body." })
+        .min(1, { message: "Field question must not be empty." }),
+    alternatives: Zod
+        .string()
+        .min(1, { message: "Alternative must not be empty." })
+        .array()
+        .length(4, {message: "Field alternative must contain a array of 4 strings."})
+        .optional(),
+    answerText: Zod
+        .string({ required_error: "Field answerText must compose request body." })
+        .optional()
+
+});
+
 export const QuestionRemoveRequestSchema = Zod.object({
-    id: Zod
-        .string({ required_error: "Field id must compose request body." })
-        .min(1, { message: "Field id must not be empty." }),
+    question: Zod
+        .string({ required_error: "Field question must compose request body." })
+        .min(1, { message: "Field question must not be empty." }),
 });

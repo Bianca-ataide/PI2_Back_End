@@ -132,7 +132,7 @@ export class ProgressController {
     try {
       const { data } = result;
 
-      const progress = await progressService.remove(data.id);
+      const progress = await progressService.remove(data);
 
       res.status(200).send({
         message: "🗑️ - Remotion Completed - " + progress.id + " deleted.",

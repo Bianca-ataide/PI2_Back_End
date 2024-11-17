@@ -58,7 +58,6 @@ export default class QuestionService {
     try {
       const result = await prisma.question.update({
         where: {
-          id: requestRef.id,
           question: requestRef.question,
         },
         data: {
@@ -74,7 +73,7 @@ export default class QuestionService {
         if (err.code == "P2025")
           throw new ValidationExceptionError(
             404,
-            requestRef.id + " - Question not found"
+            requestRef.question + " - Question not found"
           );
       }
 
@@ -82,13 +81,13 @@ export default class QuestionService {
     }
   }
 
-  public async remove(id: string) {
-    const requestRef = { id: id };
+  public async remove(question: string) {
+    const requestRef = { question: question };
 
     try {
       const result = await prisma.question.delete({
         where: {
-          id: requestRef.id,
+          question: requestRef.question,
         },
       });
 
@@ -100,7 +99,7 @@ export default class QuestionService {
         if (err.code == "P2025")
           throw new ValidationExceptionError(
             404,
-            requestRef.id + " - Question not found"
+            requestRef.question + " - Question not found"
           );
       }
 

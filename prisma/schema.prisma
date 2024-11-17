@@ -13,64 +13,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Alternative {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  text       String
-  Question   Question? @relation(fields: [questionId], references: [id])
-  questionId String?   @db.ObjectId
-}
-
 model Question {
-  id           String        @id @default(auto()) @map("_id") @db.ObjectId
-  question     String
-  alternatives Alternative[]
-  Quiz         Quiz[]        @relation(fields: [quizIDs], references: [id])
-  quizIDs      String[]      @db.ObjectId
-  answerId     String        @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  question     String   @unique
+  alternatives String[]
+  answerText   String
 }
 
 model Quiz {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  questions   Question[] @relation(fields: [questionIDs], references: [id])
-  questionIDs String[]   @db.ObjectId
-  sectionId   String?    @db.ObjectId
-  Section     Section[]
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
+  questions   String[]
 }
 
 model Section {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  text     String
-  Course   Course?    @relation(fields: [courseId], references: [id])
-  courseId String?    @db.ObjectId
-  Quiz     Quiz?      @relation(fields: [quizId], references: [id])
-  quizId   String?    @db.ObjectId
-  Progress Progress[]
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name   String @unique
+  quiz   String
 }
 
 model Course {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  name     String
-  sections Section[]
-  Progress Progress[]
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String   @unique
+  sections String[]
 }
 
 model Progress {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  user      User    @relation(fields: [userId], references: [id])
-  Section   Section @relation(fields: [sectionId], references: [id])
   completed Boolean
-  course    Course  @relation(fields: [courseId], references: [id])
-  userId    String  @db.ObjectId
-  sectionId String  @db.ObjectId
-  courseId  String  @db.ObjectId
+  username  String @unique
+  section   String @unique
 }
 
 model User {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
-  username String     @unique
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
   nickname String
   password String
   salt     String
-  Progress Progress[]
 }

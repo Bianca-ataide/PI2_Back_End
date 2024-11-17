@@ -132,7 +132,7 @@ export class CourseController {
     try {
       const { data } = result;
 
-      const course = await courseService.remove(data.id);
+      const course = await courseService.remove(data.name);
 
       res.status(200).send({
         message: "🗑️ - Remotion Completed - " + course.name + " deleted.",

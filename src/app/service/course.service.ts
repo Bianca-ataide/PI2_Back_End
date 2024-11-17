@@ -58,7 +58,6 @@ export default class CourseService {
     try {
       const result = await prisma.course.update({
         where: {
-          id: requestRef.id,
           name: requestRef.name,
         },
         data: {

@@ -1,45 +1,36 @@
 import Zod from "zod";
 
 export const QuizCreateRequestSchema = Zod.object({
-    questionsIDs: Zod
-        .string({ required_error: "Field questionsIDs must compose request body." })
-        //.min(1, { message: "Field questionsIDs must not be empty." })
+    name: Zod
+        .string({ required_error: "Field name must compose request body." })
+        .min(1, { message: "Field name must not be empty." }),
+    questions: Zod
+        .string()
+        .min(1, { message: "Questions must not be empty." })
         .array()
-        .optional(),
+        .length(4, {message: "Field questions must contain a array of 4 strings."}),
+});
 
-    sectionId: Zod
-        .string({ required_error: "Field sectionId must compose request body." })
-        .min(1, { message: "Field sectionId must not be empty." }),
-
-    });
 
 export const QuizSearchRequestSchema = Zod.object({
-    questionsIDs: Zod
-        .string()
-        .optional(),
-
-    sectionId: Zod
+    name: Zod
         .string()
         .optional()
 });
 
 export const QuizUpdateRequestSchema = Zod.object({
-    id: Zod
-        .string({ required_error: "Field id must compose request body." })
-        .min(1, { message: "Field id must not be empty." }),
-
-    questionsIDs: Zod
-        .string({ required_error: "Field questionsIDs must compose request body." })
-        .min(1, { message: "Field questionsIDs must not be empty." }),
-
-    sectionId: Zod
+    name: Zod
+        .string({ required_error: "Field name must compose request body." })
+        .min(1, { message: "Field name must not be empty." }),
+    questions: Zod
         .string()
-        .optional(),
-
+        .min(1, { message: "Questions must not be empty." })
+        .array()
+        .length(4, {message: "Field questions must contain a array of 4 strings."}),
 });
 
 export const QuizRemoveRequestSchema = Zod.object({
-    id: Zod
-        .string({ required_error: "Field id must compose request body." })
-        .min(1, { message: "Field id must not be empty." }),
+    name: Zod
+        .string({ required_error: "Field name must compose request body." })
+        .min(1, { message: "Field name must not be empty." }),
 });

@@ -40,7 +40,7 @@ export default class QuizService {
     try {
       const quizes = await prisma.quiz.findMany({
         where: {
-          sectionId: { contains: requestRef.sectionId },
+          name: { contains: requestRef.name },
         },
       });
 
@@ -58,7 +58,7 @@ export default class QuizService {
     try {
       const result = await prisma.quiz.update({
         where: {
-          id: requestRef.id,
+          name: requestRef.name,
         },
         data: {
           ...requestRef,
@@ -73,7 +73,7 @@ export default class QuizService {
         if (err.code == "P2025")
           throw new ValidationExceptionError(
             404,
-            requestRef.id + " - Quiz not found"
+            requestRef.name + " - Quiz not found"
           );
       }
 
@@ -81,13 +81,13 @@ export default class QuizService {
     }
   }
 
-  public async remove(id: string) {
-    const requestRef = { id: id };
+  public async remove(name: string) {
+    const requestRef = { name: name };
 
     try {
       const result = await prisma.quiz.delete({
         where: {
-          id: requestRef.id,
+          name: requestRef.name,
         },
       });
 
@@ -99,7 +99,7 @@ export default class QuizService {
         if (err.code == "P2025")
           throw new ValidationExceptionError(
             404,
-            requestRef.id + " - Quiz not found"
+            requestRef.name + " - Quiz not found"
           );
       }
 
