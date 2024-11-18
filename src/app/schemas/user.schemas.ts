@@ -22,10 +22,16 @@ export const UserCreateRequestSchema = Zod.object({
         .string({ required_error: "Field password must compose request body." })
         .min(1, { message: "Field password must not be empty." }),
 
+    level: Zod
+        .string({ required_error: "Field level must compose request body." })
+        .min(1, { message: "Field level must not be empty." }),
+        
     salt: Zod
         .string({ required_error: "Field salt must compose request body." })
         .min(1, { message: "Field salt must not be empty." }),
     });
+
+    
 
 export const UserSearchRequestSchema = Zod.object({
     username: Zod
@@ -33,6 +39,10 @@ export const UserSearchRequestSchema = Zod.object({
         .optional(),
 
     nickname: Zod
+        .string()
+        .optional(),
+    
+    level: Zod
         .string()
         .optional()
 });
@@ -47,6 +57,10 @@ export const UserUpdateRequestSchema = Zod.object({
         .optional(),
 
     password: Zod
+        .string()
+        .optional(),
+    
+    level: Zod
         .string()
         .optional()
 });
